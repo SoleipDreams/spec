@@ -22,9 +22,9 @@ Minimum recommended fields:
 
 ~~~yaml
 ---
-id: demo-character-mara-vale
+id: example-character
 tipo: personaje
-nombre: Mara Vale
+nombre: Example Character
 estado: canon
 ---
 ~~~
@@ -45,7 +45,7 @@ The stable ID is the durable reference used across apps. File names and display 
 Wikilinks are Obsidian-compatible references inside Markdown content.
 
 ~~~md
-Mara works with [[The-Glass-Archive]] in [[Harbor-City]].
+Example Character is related to [[Example-Location]] and [[Example-Organization]].
 ~~~
 
 ## Backlink

@@ -1,49 +1,49 @@
 {
   "specVersion": "0.1",
-  "packageId": "demo-branch-001",
+  "packageId": "example-runtime-package",
   "entryNodeId": "node-start",
   "canonRefs": [
     {
-      "id": "demo-character-mara-vale",
-      "kind": "personaje"
+      "id": "example-character",
+      "kind": "character"
     },
     {
-      "id": "demo-organization-glass-archive",
-      "kind": "organizacion"
+      "id": "example-location",
+      "kind": "location"
     }
   ],
   "variables": {
-    "knows_archive_secret": false
+    "example_flag": false
   },
   "localization": {
-    "line.node-start": "Mara waits beside the archive doors.",
-    "choice.ask": "Ask about the archive.",
-    "line.node-ask": "The archive remembers more than people do."
+    "line.node-start": "Replace this line with your own narrative text.",
+    "choice.continue": "Continue.",
+    "line.node-end": "Replace this line with an ending or next beat."
   },
   "nodes": [
     {
       "id": "node-start",
       "type": "line",
-      "speakerRef": "demo-character-mara-vale",
+      "speakerRef": "example-character",
       "textKey": "line.node-start",
       "choices": [
         {
-          "id": "choice-ask",
-          "textKey": "choice.ask",
-          "targetNodeId": "node-ask"
+          "id": "choice-continue",
+          "textKey": "choice.continue",
+          "targetNodeId": "node-end"
         }
       ]
     },
     {
-      "id": "node-ask",
+      "id": "node-end",
       "type": "line",
-      "speakerRef": "demo-character-mara-vale",
-      "textKey": "line.node-ask",
+      "speakerRef": "example-character",
+      "textKey": "line.node-end",
       "choices": [],
       "consequences": [
         {
           "type": "setVariable",
-          "name": "knows_archive_secret",
+          "name": "example_flag",
           "value": true
         }
       ]

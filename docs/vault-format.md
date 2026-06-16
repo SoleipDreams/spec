@@ -10,10 +10,10 @@ Minimum recommended frontmatter:
 
 ~~~yaml
 ---
-id: demo-character-mara-vale
-tipo: personaje
-nombre: Mara Vale
-estado: canon
+id: example-character
+tipo: character
+name: Example Character
+status: draft
 ---
 ~~~
 
@@ -26,8 +26,8 @@ The id field is the durable cross-tool reference. Names, aliases, and file paths
 Wikilinks use Obsidian-compatible syntax:
 
 ~~~md
-[[Mara-Vale]]
-[[Harbor-City|the harbor]]
+[[Example-Character]]
+[[Example-Location|example location]]
 ~~~
 
 Tools may resolve wikilinks by file basename, aliases, or future index metadata.

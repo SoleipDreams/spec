@@ -1,5 +1,7 @@
-# Everend Demo Vault
+# Everend Empty Demo Vault
 
-This is synthetic example content for Everend Spec tests and documentation. It is not personal canon.
+This vault is a deliberately empty template for testing Everend-compatible tools.
 
-Open this folder in any Markdown editor or Obsidian-compatible tool.
+It contains placeholder entities only. It is not derived from any private worldbuilding project and should not be treated as canon for any story.
+
+Replace every placeholder with your own content.
