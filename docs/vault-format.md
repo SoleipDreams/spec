@@ -57,6 +57,21 @@ Everend Spec v0.1 recommends these starter types:
 
 Projects may define their own types. The `type` field is not a closed enum.
 
+## Folder Descriptions
+
+Folders may have associated description files to document their contents and purpose. These files follow a simple naming convention:
+
+- **Folder descriptions**: A file named `{FolderName}.md` at the same level as the folder it describes
+  - Example: `Characters/` folder → `Characters.md` file
+  - These files are excluded from entity validation
+  - Recommended frontmatter: `type: "folder-description"`, `folder: "{FolderName}"`
+
+- **Vault descriptions**: A file named `{VaultName}.md` at the vault root
+  - Describes the overall world/universe
+  - Recommended frontmatter: `type: "world-description"`
+
+Folder and vault description files are optional. Tools should treat them as documentation, not as entities for runtime packages or graph validation.
+
 ## Taxonomy manifest
 
 A vault may include `.everend/taxonomy.yaml` to describe project-specific types and properties. The manifest is optional.

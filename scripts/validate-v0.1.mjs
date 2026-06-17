@@ -30,7 +30,12 @@ function markdownFiles(dir) {
     if (entry.isDirectory()) {
       results.push(...markdownFiles(fullPath));
     } else if (entry.name.endsWith(".md") && entry.name !== "README.md") {
-      results.push(fullPath);
+      // Exclude folder description files (e.g., Characters/Characters.md)
+      const parentDirName = path.basename(path.dirname(fullPath));
+      const isFolderDescription = entry.name === `${parentDirName}.md`;
+      if (!isFolderDescription) {
+        results.push(fullPath);
+      }
     }
   }
   return results;
