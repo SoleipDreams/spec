@@ -2,17 +2,19 @@
 
 Everend Spec v0.1 is the first human-readable contract for the Everend Forge ecosystem. It defines the concepts that WorldNotion, PathBranching, and engine plugins must share.
 
-This version is intentionally lightweight: Markdown contracts plus examples. JSON Schema, formal error codes, and a CLI validator are later milestones.
+This version is intentionally lightweight: Markdown contracts, JSON Schema, and examples. A CLI validator, formal compatibility matrix, and migration tooling are later milestones.
 
 ## Vault
 
-A vault is a local folder containing Markdown files and related assets. It is the canonical source for worldbuilding content.
+A vault is a local folder containing Markdown files, optional assets, and optional Everend metadata. It is the canonical source for worldbuilding and narrative planning content.
 
 A vault should remain readable in Obsidian-compatible tools and should not depend on app-private storage.
 
+An Everend-compatible vault may include `.everend/taxonomy.yaml` to describe project-specific entity types and properties. This manifest is optional; tools must still read Markdown files when it is absent.
+
 ## Entity
 
-An entity is a Markdown file representing a canon unit such as a character, location, culture, organization, event, concept, world, cycle, or universe.
+An entity is a Markdown file representing a canon or planning unit such as a character, location, organization, event, concept, item, world, cycle, universe, story, arc, scene, or quest.
 
 Entity files use YAML frontmatter plus Markdown body content.
 
@@ -23,22 +25,86 @@ Minimum recommended fields:
 ~~~yaml
 ---
 id: example-character
-tipo: personaje
-nombre: Example Character
-estado: canon
+type: character
+name: Example Character
+status: canon
 ---
 ~~~
 
 Field meanings:
 
 - id: stable identifier used by tools and runtime packages.
-- tipo: entity kind.
-- nombre: human-readable display name.
-- estado: canon, proposal, draft, deprecated, or a project-defined equivalent.
+- type: entity kind. This is an open string, not a closed enum.
+- name: human-readable display name.
+- status: canon, proposal, draft, deprecated, or a project-defined equivalent.
+
+Common optional fields:
+
+- tags: list of labels for search and grouping.
+- aliases: alternate names that tools may use for display or wikilink resolution.
+- parentId: stable ID of a parent entity.
+- childrenIds: stable IDs of child entities when the author wants to declare them explicitly.
+
+Tools must preserve unknown frontmatter fields when editing files. Project-specific properties are first-class metadata, not invalid data.
+
+## Recommended taxonomy
+
+Everend Spec v0.1 recommends a hybrid worldbuilding and narrative planning taxonomy:
+
+- character
+- location
+- organization
+- event
+- concept
+- item
+- world
+- cycle
+- universe
+- story
+- arc
+- scene
+- quest
+
+Projects may define additional types such as relic, faction, spell, species, timeline-era, or manuscript-scene.
+
+## Taxonomy manifest
+
+A vault may define `.everend/taxonomy.yaml` to describe custom types and properties.
+
+~~~yaml
+specVersion: "0.1"
+types:
+  item:
+    label: Item
+    description: Portable object, relic, tool, artifact, or inventory-relevant entity.
+    properties:
+      rarity:
+        type: select
+        options: [common, rare, legendary]
+      material:
+        type: text
+      relatedCharacters:
+        type: entityRefList
+~~~
+
+Supported property types in v0.1:
+
+- text
+- number
+- boolean
+- date
+- select
+- multiSelect
+- entityRef
+- entityRefList
 
 ## Stable ID
 
 The stable ID is the durable reference used across apps. File names and display names can change; IDs should remain stable.
+
+## Hierarchy
+
+Hierarchies use stable IDs in frontmatter. `parentId` points to one parent entity. `childrenIds` may list known child entities. Tools may infer missing reverse relationships, but should not rewrite files automatically unless the user explicitly asks.
 
 ## Wikilink
 
@@ -56,29 +122,46 @@ A backlink is derived from wikilinks. If file A links to file B, tools may show 
 
 A branch graph is an interactive narrative graph produced by PathBranching. It may reference vault entities by stable ID, but it does not replace the vault.
 
+WorldNotion may store worldbuilding and narrative planning entities such as story, arc, scene, and quest. PathBranching owns executable runtime flow such as nodes, choices, conditions, consequences, and branching state.
+
 ## Runtime package
 
 A runtime package is a JSON/YAML export that engine plugins can execute without requiring authoring apps.
 
 Runtime packages may include:
 
-- Package metadata.
-- Entry node.
-- Nodes and choices.
-- Variables.
-- Conditions.
-- Consequences.
-- Events.
-- Localization keys.
-- Canon references.
+- specVersion.
+- packageId.
+- entryNodeId.
+- canonRefs.
+- variables.
+- localization.
+- nodes and choices.
+- conditions.
+- consequences.
+- events.
 
 ## Validation report
 
 A validation report is a shared concept for warnings and errors across tools.
 
+Validation reports use `specVersion: "0.1"` and contain a list of findings.
+
+~~~yaml
+specVersion: "0.1"
+tool: worldnotion
+findings:
+  - code: missing_required_field
+    severity: error
+    file: Characters/Example.md
+    field: id
+    message: Entity is missing required field id.
+~~~
+
 Common findings include:
 
 - Missing required frontmatter.
+- Missing required field.
 - Duplicate IDs.
 - Broken wikilinks.
 - Missing canon references.
@@ -87,8 +170,8 @@ Common findings include:
 
 ## Later work
 
-- Machine-readable JSON Schema.
 - CLI validator.
 - Formal error codes.
 - Version compatibility matrix.
 - Migration rules between spec versions.
+- Formula, rollup, computed field, and database view semantics.

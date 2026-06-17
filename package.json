@@ -1,0 +1,16 @@
+{
+  "name": "@everendforge/spec",
+  "version": "0.1.0",
+  "private": false,
+  "type": "module",
+  "description": "Portable contracts, schemas, and examples for Everend Forge tools.",
+  "scripts": {
+    "test": "npm run validate:v0.1",
+    "validate:v0.1": "node scripts/validate-v0.1.mjs"
+  },
+  "devDependencies": {
+    "ajv": "^8.17.1",
+    "yaml": "^2.8.1"
+  },
+  "license": "CC-BY-4.0"
+}

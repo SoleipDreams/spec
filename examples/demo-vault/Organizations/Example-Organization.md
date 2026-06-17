@@ -1,9 +1,11 @@
 ---
 id: example-organization
-tipo: organization
+type: organization
 name: Example Organization
 status: draft
 tags: [example]
+parentId: example-location
+headquarters: example-location
 ---
 
 # Example Organization

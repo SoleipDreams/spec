@@ -1,9 +1,11 @@
 ---
 id: example-location
-tipo: location
+type: location
 name: Example Location
-status: draft
+status: canon
 tags: [example]
+childrenIds: [example-organization]
+region: Example Region
 ---
 
 # Example Location

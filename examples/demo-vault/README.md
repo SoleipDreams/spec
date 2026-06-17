@@ -4,4 +4,6 @@ This vault is a deliberately empty template for testing Everend-compatible tools
 
 It contains placeholder entities only. It is not derived from any private worldbuilding project and should not be treated as canon for any story.
 
+The `.everend/taxonomy.yaml` file demonstrates optional project-specific taxonomy metadata. The Markdown files remain readable without it.
+
 Replace every placeholder with your own content.

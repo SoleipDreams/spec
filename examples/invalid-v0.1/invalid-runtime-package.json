@@ -1,0 +1,11 @@
+{
+  "specVersion": "0.2",
+  "packageId": "invalid-runtime-package",
+  "entryNodeId": "node-start",
+  "nodes": [
+    {
+      "id": "node-start",
+      "type": "line"
+    }
+  ]
+}

@@ -1,0 +1,5 @@
+specVersion: "0.1"
+tool: worldnotion
+findings:
+  - severity: error
+    message: This finding is invalid because code is missing.

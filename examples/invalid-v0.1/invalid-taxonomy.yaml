@@ -1,0 +1,7 @@
+specVersion: "0.1"
+types:
+  item:
+    label: Item
+    properties:
+      rarity:
+        type: rating

@@ -1,9 +1,11 @@
 ---
 id: example-story
-tipo: story
+type: story
 name: Example Story
 status: draft
 tags: [example]
+childrenIds: [example-scene]
+draftStatus: outline
 ---
 
 # Example Story
@@ -14,3 +16,4 @@ Referenced entities:
 
 - [[Example-Character]]
 - [[Example-Location]]
+- [[Example-Scene]]
